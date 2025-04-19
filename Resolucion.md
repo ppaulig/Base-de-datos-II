@@ -182,6 +182,46 @@ Ejemplo 1 READ COMMITTED:
 
 *Administración, Seguridad y Mantenimiento*
 
+5. Supongamos esta tabla:
+
+CREATE TABLE Productos (
+    id INT PRIMARY KEY,
+    nombre VARCHAR(100),
+    categoria VARCHAR(50),
+    precio DECIMAL(10,2),
+    stock INT
+);
+
+Consulta sin índice:
+
+SELECT * 
+FROM Productos
+WHERE categoria = 'Electrónica' AND precio > 500;
+
+Crear indices:
+
+Indice por categoria
+CREATE INDEX idx_categoria ON Productos(categoria);
+
+Indice por precio
+CREATE INDEX idx_precio ON Productos(precio);
+
+Indice combinado
+CREATE INDEX idx_categoria_precio ON Productos(categoria, precio);
+
+
+Medir rendimiento:
+Usá EXPLAIN para ver el plan de ejecución y ver qué índice se utiliza:
+
+EXPLAIN SELECT * 
+FROM Productos
+WHERE categoria = 'Electrónica' AND precio > 500;
+
+Comparacion:
+El índice combinado idx_categoria_precio deberia ser el más eficiente para esta consulta que filtra por ambos campos.
+Los otros dos pueden ayudar pero no seran tan optimos porque cada uno cubre solo una condicion.
+
+
 8. Simulación de auditoría simple con triggers que registren toda modificación en la tabla Clientes: 
 
             -- Creamos la tabla clientes
