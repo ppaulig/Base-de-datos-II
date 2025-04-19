@@ -168,12 +168,14 @@ Ejemplo 1 READ COMMITED:
 
     Consulta sin indice:   
      
-                EXPLAIN SELECT * FROM productos WHERE stock = 0; -- Duracion: 0.016 segundos
+                EXPLAIN SELECT * FROM productos WHERE stock = 0; -- Duracion: 0.016 
+    ![Consulta sin índice](Capturas/Explain.png)
 
     Consulta con indice:    
 
                 CREATE INDEX idx_stock ON productos(stock);
                 EXPLAIN SELECT * FROM productos WHERE stock = 0; -- Duracion: 0.000 segundos
+    ![Consulta sin índice](Capturas/Explain-index.png)
 
     Conclusion: con indice se accede directamente a los regristros relevantes mejorando el rendiemiento ytiempo de respuesta de las consultas.
 
