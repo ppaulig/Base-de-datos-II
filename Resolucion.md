@@ -180,48 +180,85 @@ Ejemplo 1 READ COMMITTED:
     Conclusión: con índice se accede directamente a los registros relevantes mejorando el rendimiento y tiempo de respuesta de las consultas.        
 
 
-*Administración, Seguridad y Mantenimiento*
+
 
 5. Supongamos esta tabla:
 
-CREATE TABLE Productos (
-    id INT PRIMARY KEY,
-    nombre VARCHAR(100),
-    categoria VARCHAR(50),
-    precio DECIMAL(10,2),
-    stock INT
-);
+        CREATE TABLE Productos (
+            id INT PRIMARY KEY,
+            nombre VARCHAR(100),
+            categoria VARCHAR(50),
+            precio DECIMAL(10,2),
+            stock INT
+        );
 
-Consulta sin índice:
+        Consulta sin índice:
 
-SELECT * 
-FROM Productos
-WHERE categoria = 'Electrónica' AND precio > 500;
+        SELECT * 
+        FROM Productos
+        WHERE categoria = 'Electrónica' AND precio > 500;
 
-Crear indices:
+        Crear indices:
 
-Indice por categoria
-CREATE INDEX idx_categoria ON Productos(categoria);
+        Indice por categoria
+        CREATE INDEX idx_categoria ON Productos(categoria);
 
-Indice por precio
-CREATE INDEX idx_precio ON Productos(precio);
+        Indice por precio
+        CREATE INDEX idx_precio ON Productos(precio);
 
-Indice combinado
-CREATE INDEX idx_categoria_precio ON Productos(categoria, precio);
-
-
-Medir rendimiento:
-Usá EXPLAIN para ver el plan de ejecución y ver qué índice se utiliza:
-
-EXPLAIN SELECT * 
-FROM Productos
-WHERE categoria = 'Electrónica' AND precio > 500;
-
-Comparacion:
-El índice combinado idx_categoria_precio deberia ser el más eficiente para esta consulta que filtra por ambos campos.
-Los otros dos pueden ayudar pero no seran tan optimos porque cada uno cubre solo una condicion.
+        Indice combinado
+        CREATE INDEX idx_categoria_precio ON Productos(categoria, precio);
 
 
+        Medir rendimiento:
+        Usá EXPLAIN para ver el plan de ejecución y ver qué índice se utiliza:
+
+        EXPLAIN SELECT * 
+        FROM Productos
+        WHERE categoria = 'Electrónica' AND precio > 500;
+
+        Comparacion:
+        El índice combinado idx_categoria_precio deberia ser el más eficiente para esta consulta que filtra por ambos campos.
+        Los otros dos pueden ayudar pero no seran tan optimos porque cada uno cubre solo una condicion.
+
+6. 
+    -Creamos las tablas necesarias  
+
+        CREATE TABLE Productos (
+            id_producto SERIAL PRIMARY KEY,
+            nombre VARCHAR(100)
+        );
+        CREATE TABLE Ventas (
+            id SERIAL PRIMARY KEY,
+            id_producto INT REFERENCES Productos(id_producto),
+            fecha DATE,
+            cantidad INT
+        );
+
+    -Vista de las ventas mensuales
+
+        CREATE VIEW VentasMensuales AS
+        SELECT 
+            id_producto,
+            DATE_TRUNC('month', fecha) AS mes,
+            SUM(cantidad) AS total_vendido
+        FROM Ventas
+        GROUP BY id_producto, mes;
+
+    -Consulta para saber los 5 productos mas vendidos
+
+        SELECT 
+        p.nombre, 
+        SUM(vm.total_vendido) AS total_vendido
+        FROM VentasMensuales vm
+        JOIN Productos p ON p.id_producto = vm.id_producto
+        GROUP BY p.nombre
+        ORDER BY total_vendido DESC
+        LIMIT 5;
+
+
+*Administración, Seguridad y Mantenimiento*   
+ 
 8. Simulación de auditoría simple con triggers que registren toda modificación en la tabla Clientes: 
 
             -- Creamos la tabla clientes
@@ -302,7 +339,45 @@ Los otros dos pueden ayudar pero no seran tan optimos porque cada uno cubre solo
             SELECT * FROM auditoria; -- Vemos si se guardaron los datos en la tabla
 
     Deberíamos ver la tabla auditoria de esta manera: 
-        ![Consulta sin índice](Capturas/auditoria.png)
+![Consulta sin índice](Capturas/auditoria.png)  
+
+9. Backup de base de datos, simulación de pérdida y restauración de los datos en MySQL.  
+    Para hacer un backup necesitamos usar una base de datos existente o crear una. Crearemos una para usar en este ejemplo:
+
+            CREATE DATABASE Punto9;
+            USE Punto9;
+
+            CREATE TABLE Integrantes (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            nombre VARCHAR(50)
+            );
+
+            INSERT INTO Integrantes (nombre)
+            VALUES ('Hernan'), ('Paula'), ('Rodrigo'), ('Juan');
+    ![Consulta sin índice](Capturas/Creacion-tabla.png)
+    
+    Una vez creada la base de datos, abrimos la consola y ejecutamos el siguiente comando para hacer el backup:
+
+            mysqldump -u root -p Punto9 > backup_Punto9.sql
+
+    Luego simularemos la pérdida de datos eliminando la tabla Integrantes:
+
+            USE Punto9;
+            DROP TABLE Integrantes;
+            SHOW TABLES;
+    ![Consulta sin índice](Capturas/Backup-perdida.png)
+
+    Volvemos a la consola y restauramos el backup:
+
+            mysql -u root -p Punto9 < backup_Punto9.sql
+
+    Verificamos en MySQL si se recuperaron los datos borrados:
+
+            USE Punto9;
+            SELECT * FROM Integrantes;
+    ![Consulta sin índice](Capturas/Restauracion.png)
+
+
 
 
 
