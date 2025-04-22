@@ -257,6 +257,48 @@ Ejemplo 1 READ COMMITTED:
         LIMIT 5;
 
 
+7.  
+    1- creamos la conexion
+
+    2-  creamos la base de datos:
+        CREATE DATABASE empresa;
+
+        USE empresa;
+
+    3- creamos la tabla y agregamos datos:
+    ![creacion de tabla](Capturas/create-table.png)
+
+    ![ingreso contenido](Capturas/insert.png)
+
+    4- creamos el usuario analista:
+        CREATE USER 'analista'@'localhost' IDENTIFIED BY 'analista123';
+
+    5- se dan permisos de solo lectura:
+        GRANT USAGE ON empresa.empleados* TO 'analista'@'localhost';
+        GRANT USAGE ON empresa.proyectos* TO 'analista'@'localhost';
+
+    ![permisos analista](Capturas/permisos-lectura.png)
+
+    6- aplicamos los cambios
+        FLUSH PRIVILEGES;
+
+    7- creamos ela ConexionAnalista:
+        nombre: analista
+        hostname: localhost
+        port: 3306
+        contraseña: analista123
+
+    8- conectamos como analista:
+        SELECT * FROM empleados;
+
+    9- probamos en agregar datos para probar las restricciones:
+        INSERT INTO empleados
+
+    ![insert contenido parar resticciones](Capturas/insert.png)
+
+    ![mensaje error](Capturas/mensaje-error.png)    
+
+
 *Administración, Seguridad y Mantenimiento*   
  
 8. Simulación de auditoría simple con triggers que registren toda modificación en la tabla Clientes: 
@@ -339,7 +381,7 @@ Ejemplo 1 READ COMMITTED:
             SELECT * FROM auditoria; -- Vemos si se guardaron los datos en la tabla
 
     Deberíamos ver la tabla auditoria de esta manera: 
-![Consulta sin índice](Capturas/auditoria.png)  
+![Tabla auditoria](Capturas/auditoria.png)  
 
 9. Backup de base de datos, simulación de pérdida y restauración de los datos en MySQL.  
     Para hacer un backup necesitamos usar una base de datos existente o crear una. Crearemos una para usar en este ejemplo:
@@ -354,7 +396,7 @@ Ejemplo 1 READ COMMITTED:
 
             INSERT INTO Integrantes (nombre)
             VALUES ('Hernan'), ('Paula'), ('Rodrigo'), ('Juan');
-    ![Consulta sin índice](Capturas/Creacion-tabla.png)
+    ![Crear tabla](Capturas/Creacion-tabla.png)
     
     Una vez creada la base de datos, abrimos la consola y ejecutamos el siguiente comando para hacer el backup:
 
@@ -365,7 +407,7 @@ Ejemplo 1 READ COMMITTED:
             USE Punto9;
             DROP TABLE Integrantes;
             SHOW TABLES;
-    ![Consulta sin índice](Capturas/Backup-perdida.png)
+    ![Backup y perdida](Capturas/Backup-perdida.png)
 
     Volvemos a la consola y restauramos el backup:
 
@@ -375,7 +417,7 @@ Ejemplo 1 READ COMMITTED:
 
             USE Punto9;
             SELECT * FROM Integrantes;
-    ![Consulta sin índice](Capturas/Restauracion.png)
+    ![Restaurar backup](Capturas/Restauracion.png)
 
 
 
