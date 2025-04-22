@@ -260,38 +260,45 @@ Ejemplo 1 READ COMMITTED:
 7.  
     1- creamos la conexion
 
-    2-  creamos la base de datos:
+    2-  creamos la base de datos:    
+
         CREATE DATABASE empresa;
 
         USE empresa;
 
-    3- creamos la tabla y agregamos datos:
-    ![creacion de tabla](Capturas/create-table.png)
+    3- creamos la tabla y agregamos datos:  
+    ![creacion de tabla](Capturas/create-table.png)  
 
-    ![ingreso contenido](Capturas/insert.png)
+    ![ingreso contenido](Capturas/insert.png)  
 
-    4- creamos el usuario analista:
+    4- creamos el usuario analista:  
+
         CREATE USER 'analista'@'localhost' IDENTIFIED BY 'analista123';
 
-    5- se dan permisos de solo lectura:
+    5- se dan permisos de solo lectura:  
+
         GRANT USAGE ON empresa.empleados* TO 'analista'@'localhost';
-        GRANT USAGE ON empresa.proyectos* TO 'analista'@'localhost';
+        GRANT USAGE ON empresa.proyectos* TO 'analista'@'localhost';  
 
     ![permisos analista](Capturas/permisos-lectura.png)
 
-    6- aplicamos los cambios
+    6- aplicamos los cambios  
+
         FLUSH PRIVILEGES;
 
-    7- creamos ela ConexionAnalista:
+    7- creamos la ConexionAnalista:  
+
         nombre: analista
         hostname: localhost
         port: 3306
         contraseña: analista123
 
-    8- conectamos como analista:
+    8- conectamos como analista:  
+
         SELECT * FROM empleados;
 
-    9- probamos en agregar datos para probar las restricciones:
+    9- probamos en agregar datos para probar las restricciones:  
+    
         INSERT INTO empleados
 
     ![insert contenido parar resticciones](Capturas/insert.png)
