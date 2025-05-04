@@ -1,0 +1,14 @@
+use("TP2")
+
+// Creamos la colección clientes
+db.clientes.insertMany([
+    { nombre: "Juan", apellido: "Pérez", edad: 30 },
+    { nombre: "Ana", apellido: "Gómez", edad: 25 },
+    { nombre: "Luis", apellido: "Martínez", edad: 40 },
+    { nombre: "Carla", apellido: "Pérez", edad: 35 },
+    { nombre: "Lucía", apellido: "Gómez", edad: 28 },
+    { nombre: "Pedro", apellido: "Martínez", edad: 50 }
+])
+
+// Creamos índice compuesto sobre apellido y nombre
+db.clientes.createIndex({ apellido: 1, nombre: 1 });

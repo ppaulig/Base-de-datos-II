@@ -1,0 +1,7 @@
+use("Empresa")
+
+// Recuperar el nombre y puesto sin mostrar el id
+db.empleados.find(
+    {},
+    { _id: 0, nombre: 1, puesto: 1 }
+)

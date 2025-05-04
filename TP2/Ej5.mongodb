@@ -1,0 +1,20 @@
+use("TP2")
+
+// Creamos la coleccion ventas
+db.ventas.insertMany([
+    { producto: "Manzana", cantidad: 10, precio_unitario: 2 },
+    { producto: "Banana", cantidad: 5, precio_unitario: 1.5 },
+    { producto: "Manzana", cantidad: 7, precio_unitario: 2 },
+    { producto: "Naranja", cantidad: 3, precio_unitario: 2.5 },
+    { producto: "Banana", cantidad: 8, precio_unitario: 1.5 }
+]);
+
+// Calculamos el total de ventas por producto
+db.ventas.aggregate([
+    {
+      $group: {
+        _id: "$producto",
+        cantidad_total_vendida: { $sum: "$cantidad" }
+      }
+    }
+])

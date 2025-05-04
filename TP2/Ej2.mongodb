@@ -1,0 +1,6 @@
+use("Empresa")
+
+//Buscar empleados cuya edad este entre 25 y 40 años
+db.empleados.find({
+    $and:[{edad:{$gte:25}}, {edad:{$lte:40}}]
+})

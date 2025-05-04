@@ -1,0 +1,13 @@
+use("TP2")
+
+// Combinamos datos de cursos y alumnos
+db.alumnos.aggregate([
+    {
+      $lookup: {
+        from: "cursos",
+        localField: "id_cursos",
+        foreignField: "_id",
+        as: "cursos_info"
+      }
+    }
+])

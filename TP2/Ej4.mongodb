@@ -1,0 +1,12 @@
+use("Empresa")
+
+// Agregamos el campo direccion
+db.empleados.updateMany({}, {
+    $set: {
+      direccion: {
+        calle: "Falsa 123",
+        ciudad: "Springfield",
+        codigo_postal: "1234"
+      }
+    }
+})

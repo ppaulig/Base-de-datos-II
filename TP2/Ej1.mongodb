@@ -1,0 +1,18 @@
+// Creamos la base de datos Empresa
+use("Empresa")
+
+// Insertamos la colección empleados con 3 documentos
+db.empleados.insertMany([
+    { nombre: "Ana", edad: 28, puesto: "desarrollador" },
+    { nombre: "Luis", edad: 35, puesto: "diseñador" },
+    { nombre: "Carla", edad: 30, puesto: "pasante" }
+])
+
+// Modificamos la edad de un empleado
+db.empleados.updateOne(
+    { nombre: "Ana" },
+    { $set: { edad: 29 } }
+)
+
+// Eliminamos el empleado con el puesto "pasante"
+db.empleados.deleteOne({ puesto: "pasante" })
