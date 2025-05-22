@@ -8,7 +8,7 @@ db.createUser({
 })
 
 // Hacemos un backup desde la consola:
-    // mongodump --db=TP2 --out=./backup
+// mongodump --db=TP2 --out=./backup
 
 // Restauramos desde la consola:
-    // mongorestore --db=TP2 ./backup/TP2
+// mongorestore --db=TP2 ./backup/TP2

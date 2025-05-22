@@ -1,0 +1,27 @@
+use ("tiendaOnline")
+
+//Agrupar las ventas por mes y calcular el total vendido en cada mes.
+db.ventas.aggregate([
+  {
+    $group: {
+      _id: {
+        year: { $year: "$fecha" },
+        month: { $month: "$fecha" }
+      },
+      total_vendido: { $sum: "$total" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      mes: {
+        $concat: [
+          { $toString: "$_id.month" },
+          "/",
+          { $toString: "$_id.year" }
+        ]
+      },
+      total_vendido: 1
+    }
+  }
+])

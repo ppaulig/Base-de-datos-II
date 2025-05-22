@@ -1,0 +1,335 @@
+use("tiendaOnline")
+db.productos.insertMany([
+  {
+    _id: 1,
+    nombre: "Laptop Pro X",
+    categoria: "Electrónica",
+    precio: 1200.00,
+    stock: 15,
+    características: ["8GB RAM", "256GB SSD", "Intel i5"],
+    valoraciones: [
+      { usuario: "user123", puntuacion: 4, comentario: "Muy buen producto" },
+      { usuario: "user456", puntuacion: 5, comentario: "Excelente calidad" },
+      { usuario: "user789", puntuacion: 3, comentario: "Precio elevado para lo que ofrece" }
+    ],
+    proveedor: { nombre: "TechSupplies", pais: "Estados Unidos" },
+    fecha_ingreso: new Date("2023-01-15")
+  },
+  {
+    _id: 2,
+    nombre: "Smartphone Galaxy",
+    categoria: "Electrónica",
+    precio: 800.00,
+    stock: 25,
+    características: ["6GB RAM", "128GB Almacenamiento", "Cámara 48MP"],
+    valoraciones: [
+      { usuario: "user111", puntuacion: 5, comentario: "Increíble teléfono" },
+      { usuario: "user222", puntuacion: 4, comentario: "Buena cámara" }
+    ],
+    proveedor: { nombre: "MobileWorld", pais: "Corea del Sur" },
+    fecha_ingreso: new Date("2023-02-10")
+  },
+  {
+    _id: 3,
+    nombre: "Auriculares Inalámbricos",
+    categoria: "Accesorios",
+    precio: 120.00,
+    stock: 50,
+    características: ["Bluetooth 5.0", "Cancelación de ruido", "20h batería"],
+    valoraciones: [
+      { usuario: "user333", puntuacion: 4, comentario: "Buen sonido" },
+      { usuario: "user444", puntuacion: 3, comentario: "La batería dura menos de lo anunciado" },
+      { usuario: "user555", puntuacion: 5, comentario: "Excelente calidad de sonido" }
+    ],
+    proveedor: { nombre: "AudioTech", pais: "Japón" },
+    fecha_ingreso: new Date("2023-03-05")
+  },
+  {
+    _id: 4,
+    nombre: "Monitor UltraWide",
+    categoria: "Electrónica",
+    precio: 350.00,
+    stock: 10,
+    características: ["34 pulgadas", "3440x1440", "HDR"],
+    valoraciones: [
+      { usuario: "user666", puntuacion: 5, comentario: "Increíble para trabajar" },
+      { usuario: "user777", puntuacion: 5, comentario: "Perfecto para gaming" }
+    ],
+    proveedor: { nombre: "ScreenMasters", pais: "Taiwán" },
+    fecha_ingreso: new Date("2023-01-20")
+  },
+  {
+    _id: 5,
+    nombre: "Teclado Mecánico RGB",
+    categoria: "Accesorios",
+    precio: 90.00,
+    stock: 30,
+    características: ["Switches Cherry MX", "Retroiluminación RGB", "Teclas programables"],
+    valoraciones: [
+      { usuario: "user888", puntuacion: 4, comentario: "Buen teclado para gaming" },
+      { usuario: "user999", puntuacion: 3, comentario: "Un poco ruidoso" }
+    ],
+    proveedor: { nombre: "GamerGear", pais: "Estados Unidos" },
+    fecha_ingreso: new Date("2023-02-25")
+  },
+  {
+    _id: 6,
+    nombre: "Tablet Pro",
+    categoria: "Electrónica",
+    precio: 450.00,
+    stock: 20,
+    características: ["10 pulgadas", "128GB Almacenamiento", "Procesador A14"],
+    valoraciones: [
+      { usuario: "user101", puntuacion: 5, comentario: "Perfecta para dibujar" },
+      { usuario: "user102", puntuacion: 4, comentario: "Buena relación calidad-precio" },
+      { usuario: "user103", puntuacion: 5, comentario: "Muy potente" }
+    ],
+    proveedor: { nombre: "TechSupplies", pais: "Estados Unidos" },
+    fecha_ingreso: new Date("2023-03-15")
+  },
+  {
+    _id: 7,
+    nombre: "Mouse Gaming",
+    categoria: "Accesorios",
+    precio: 60.00,
+    stock: 40,
+    características: ["12000 DPI", "RGB", "7 botones programables"],
+    valoraciones: [
+      { usuario: "user104", puntuacion: 4, comentario: "Muy preciso" },
+      { usuario: "user105", puntuacion: 5, comentario: "Cómodo para sesiones largas" }
+    ],
+    proveedor: { nombre: "GamerGear", pais: "Estados Unidos" },
+    fecha_ingreso: new Date("2023-02-15")
+  },
+  {
+    _id: 8,
+    nombre: "Impresora Láser",
+    categoria: "Oficina",
+    precio: 200.00,
+    stock: 15,
+    características: ["Monocromática", "Duplex", "WiFi"],
+    valoraciones: [
+      { usuario: "user106", puntuacion: 3, comentario: "Consume mucho tóner" },
+      { usuario: "user107", puntuacion: 4, comentario: "Rápida impresión" }
+    ],
+    proveedor: { nombre: "OfficeSupply", pais: "China" },
+    fecha_ingreso: new Date("2023-01-25")
+  },
+  {
+    _id: 9,
+    nombre: "Webcam HD",
+    categoria: "Accesorios",
+    precio: 80.00,
+    stock: 25,
+    características: ["1080p", "Micrófono integrado", "Corrección de luz"],
+    valoraciones: [
+      { usuario: "user108", puntuacion: 4, comentario: "Buena calidad de imagen" },
+      { usuario: "user109", puntuacion: 5, comentario: "Excelente para videoconferencias" },
+      { usuario: "user110", puntuacion: 3, comentario: "El micrófono podría ser mejor" }
+    ],
+    proveedor: { nombre: "VideoTech", pais: "Taiwán" },
+    fecha_ingreso: new Date("2023-02-05")
+  },
+  {
+    _id: 10,
+    nombre: "Disco Duro Externo",
+    categoria: "Almacenamiento",
+    precio: 110.00,
+    stock: 30,
+    características: ["2TB", "USB 3.0", "Compacto"],
+    valoraciones: [
+      { usuario: "user111", puntuacion: 4, comentario: "Buena capacidad" },
+      { usuario: "user112", puntuacion: 5, comentario: "Rápido y fiable" }
+    ],
+    proveedor: { nombre: "StoragePro", pais: "Japón" },
+    fecha_ingreso: new Date("2023-03-20")
+  }
+]);
+
+db.ventas.insertMany([
+  {
+    _id: 101,
+    producto_id: 1,
+    cliente: { nombre: "Ana Martínez", email: "ana@example.com", pais: "España" },
+    cantidad: 1,
+    precio_unitario: 1200.00,
+    total: 1200.00,
+    fecha: new Date("2023-03-15"),
+    estado: "Entregado",
+    metodo_pago: "Tarjeta de crédito"
+  },
+  {
+    _id: 102,
+    producto_id: 3,
+    cliente: { nombre: "Carlos López", email: "carlos@example.com", pais: "México" },
+    cantidad: 2,
+    precio_unitario: 120.00,
+    total: 240.00,
+    fecha: new Date("2023-03-16"),
+    estado: "Entregado",
+    metodo_pago: "PayPal"
+  },
+  {
+    _id: 103,
+    producto_id: 5,
+    cliente: { nombre: "María González", email: "maria@example.com", pais: "Argentina" },
+    cantidad: 1,
+    precio_unitario: 90.00,
+    total: 90.00,
+    fecha: new Date("2023-03-17"),
+    estado: "En tránsito",
+    metodo_pago: "Transferencia bancaria"
+  },
+  {
+    _id: 104,
+    producto_id: 2,
+    cliente: { nombre: "Juan Pérez", email: "juan@example.com", pais: "Colombia" },
+    cantidad: 1,
+    precio_unitario: 800.00,
+    total: 800.00,
+    fecha: new Date("2023-03-18"),
+    estado: "Procesando",
+    metodo_pago: "Tarjeta de crédito"
+  },
+  {
+    _id: 105,
+    producto_id: 7,
+    cliente: { nombre: "Ana Martínez", email: "ana@example.com", pais: "España" },
+    cantidad: 1,
+    precio_unitario: 60.00,
+    total: 60.00,
+    fecha: new Date("2023-03-19"),
+    estado: "Entregado",
+    metodo_pago: "PayPal"
+  },
+  {
+    _id: 106,
+    producto_id: 10,
+    cliente: { nombre: "Roberto Sánchez", email: "roberto@example.com", pais: "Chile" },
+    cantidad: 2,
+    precio_unitario: 110.00,
+    total: 220.00,
+    fecha: new Date("2023-03-20"),
+    estado: "Entregado",
+    metodo_pago: "Tarjeta de crédito"
+  },
+  {
+    _id: 107,
+    producto_id: 4,
+    cliente: { nombre: "Laura García", email: "laura@example.com", pais: "España" },
+    cantidad: 1,
+    precio_unitario: 350.00,
+    total: 350.00,
+    fecha: new Date("2023-03-21"),
+    estado: "En tránsito",
+    metodo_pago: "Transferencia bancaria"
+  },
+  {
+    _id: 108,
+    producto_id: 6,
+    cliente: { nombre: "Carlos López", email: "carlos@example.com", pais: "México" },
+    cantidad: 1,
+    precio_unitario: 450.00,
+    total: 450.00,
+    fecha: new Date("2023-03-22"),
+    estado: "Procesando",
+    metodo_pago: "PayPal"
+  },
+  {
+    _id: 109,
+    producto_id: 9,
+    cliente: { nombre: "Elena Rodríguez", email: "elena@example.com", pais: "Argentina" },
+    cantidad: 3,
+    precio_unitario: 80.00,
+    total: 240.00,
+    fecha: new Date("2023-03-23"),
+    estado: "Entregado",
+    metodo_pago: "Tarjeta de crédito"
+  },
+  {
+    _id: 110,
+    producto_id: 8,
+    cliente: { nombre: "Miguel Fernández", email: "miguel@example.com", pais: "Colombia" },
+    cantidad: 1,
+    precio_unitario: 200.00,
+    total: 200.00,
+    fecha: new Date("2023-03-24"),
+    estado: "Entregado",
+    metodo_pago: "Transferencia bancaria"
+  },
+  {
+    _id: 111,
+    producto_id: 2,
+    cliente: { nombre: "Pedro Díaz", email: "pedro@example.com", pais: "España" },
+    cantidad: 1,
+    precio_unitario: 800.00,
+    total: 800.00,
+    fecha: new Date("2023-03-25"),
+    estado: "Procesando",
+    metodo_pago: "Tarjeta de crédito"
+  },
+  {
+    _id: 112,
+    producto_id: 1,
+    cliente: { nombre: "Ana Martínez", email: "ana@example.com", pais: "España" },
+    cantidad: 1,
+    precio_unitario: 1200.00,
+    total: 1200.00,
+    fecha: new Date("2023-03-26"),
+    estado: "En tránsito",
+    metodo_pago: "PayPal"
+  },
+  {
+    _id: 113,
+    producto_id: 5,
+    cliente: { nombre: "Carlos López", email: "carlos@example.com", pais: "México" },
+    cantidad: 2,
+    precio_unitario: 90.00,
+    total: 180.00,
+    fecha: new Date("2023-03-27"),
+    estado: "Entregado",
+    metodo_pago: "Tarjeta de crédito"
+  },
+  {
+    _id: 114,
+    producto_id: 3,
+    cliente: { nombre: "Sofía Torres", email: "sofia@example.com", pais: "Chile" },
+    cantidad: 1,
+    precio_unitario: 120.00,
+    total: 120.00,
+    fecha: new Date("2023-03-28"),
+    estado: "Entregado",
+    metodo_pago: "Transferencia bancaria"
+  },
+  {
+    _id: 115,
+    producto_id: 7,
+    cliente: { nombre: "Juan Pérez", email: "juan@example.com", pais: "Colombia" },
+    cantidad: 1,
+    precio_unitario: 60.00,
+    total: 60.00,
+    fecha: new Date("2023-03-29"),
+    estado: "Procesando",
+    metodo_pago: "PayPal"
+  }
+]);
+
+// Encontrar todos los productos de la categoría "Electrónica" con un precio superior a 500.
+db.productos.aggregate([
+    {
+        $match: {
+            categoria: "Electrónica",
+            precio: { $gt: 500 }
+        }
+    }
+])
+
+// Encontrar todas las ventas realizadas a clientes de "España" que tengan estado "Entregado".
+db.ventas.aggregate([
+    {
+        $match: {
+            "cliente.pais": "España",
+            estado: "Entregado"
+        }
+    }
+])
