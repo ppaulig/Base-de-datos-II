@@ -25,3 +25,24 @@ db.ventas.aggregate([
     }
   }
 ])
+
+// Encontrar el día de la semana con más ventas.
+db.ventas.aggregate([
+    {
+        $group:{
+            _id:{$dayOfWeek: "$fecha"},
+            ventas: {$sum:1}
+        }
+    },
+    {
+        $sort:{
+            ventas: -1,
+        }
+    },
+    {
+        $limit: 1
+    }
+    
+])
+
+

@@ -15,6 +15,7 @@ db.ventas.aggregate([
     {
         $group: {
             _id: "$cliente.pais",
+            totalVentas: {$sum: "$cantidad"},
             transacciones: { $sum: 1 },
             montoTotal: { $sum: "$total" }
         }
