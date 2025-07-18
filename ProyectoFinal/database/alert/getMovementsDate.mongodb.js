@@ -1,6 +1,6 @@
-use('Inventario');
+use('InventarioTienda');
 
-db.movimientos.aggregate([
+db.movements.aggregate([
         {
             "$match": {
                 "fecha": {
@@ -11,7 +11,7 @@ db.movimientos.aggregate([
         },
         {
             "$lookup": {
-                "from": "productos",
+                "from": "products",
                 "localField": "productoId",
                 "foreignField": "_id",
                 "as": "producto"

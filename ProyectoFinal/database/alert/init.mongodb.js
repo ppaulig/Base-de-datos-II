@@ -1,9 +1,9 @@
 id_producto = ObjectId();
 id_proovedor = ObjectId();
-id_movement = ObjectId();
+id_movimiento = ObjectId();
 
 // Insertar producto
-db.productos.insertOne({
+db.products.insertOne({
   _id: id_producto,
   codigo: "PROD2025",
   nombre: "Teclado Mecánico Redragon K552",
@@ -16,8 +16,8 @@ db.productos.insertOne({
 });
 
 // Insertar movimiento
-db.movimientos.insertOne({
-  _id: id_movement,
+db.movements.insertOne({
+  _id: id_movimiento,
   productoId: id_producto,
   tipo: "entrada", // "entrada" o "salida"
   cantidad: 20,
@@ -27,7 +27,7 @@ db.movimientos.insertOne({
 });
 
 // Insertar proveedor
-db.proveedores.insertOne({
+db.suppliers.insertOne({
   _id: id_proovedor,
   nombre: "Importadora TecnoPlus",
   contacto: "Carla Méndez",

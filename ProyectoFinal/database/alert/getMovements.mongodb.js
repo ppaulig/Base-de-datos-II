@@ -1,9 +1,9 @@
-use("Inventario")
+use("InventarioTienda")
 
-db.movimientos.aggregate([
+db.movements.aggregate([
 {
             "$lookup": {
-                "from": "productos",
+                "from": "products",
                 "localField": "productoId",
                 "foreignField": "_id",
                 "as": "producto"

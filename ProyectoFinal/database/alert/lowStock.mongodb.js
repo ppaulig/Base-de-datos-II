@@ -1,6 +1,6 @@
-use('Inventario');
+use('InventarioTienda');
 
-db.productos.aggregate([
+db.products.aggregate([
 
 {
             "$match": {
@@ -11,7 +11,7 @@ db.productos.aggregate([
         },
         {
             "$lookup": {
-                "from": "proveedores",
+                "from": "suppliers",
                 "localField": "proveedorId",
                 "foreignField": "_id",
                 "as": "proveedor"

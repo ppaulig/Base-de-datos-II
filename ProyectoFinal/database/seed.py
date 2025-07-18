@@ -1,27 +1,13 @@
-from pymongo import MongoClient
-
-client = MongoClient("mongodb://mongo:27017/")
-client_db = client["Inventario"]
-
-if __name__ == "__main__":
-    # test
-    productos = client_db["productos"]
-    print(list(productos.find({})))
 from bson import ObjectId
 from datetime import datetime
 
 def seed_data(db):
-    """
-    Inserta datos de ejemplo en la base de datos si todas las colecciones están vacías.
 
-    Args:
-        db: Conexión a la base de datos MongoDB.
-    """
-    if db.productos.count_documents({}) == 0 and db.proveedores.count_documents({}) == 0 and db.movimientos.count_documents({}) == 0:
+    if db.products.count_documents({}) == 0 and db.suppliers.count_documents({}) == 0 and db.movements.count_documents({}) == 0:
         id_producto = ObjectId()
         id_proveedor = ObjectId()
 
-        db.productos.insert_one({
+        db.products.insert_one({
             "_id": id_producto,
             "codigo": "PROD1001",
             "nombre": "Mouse Logitech M170",
@@ -33,7 +19,7 @@ def seed_data(db):
             "fechaUltimaActualizacion": datetime.utcnow()
         })
 
-        db.movimientos.insert_one({
+        db.movements.insert_one({
             "_id": ObjectId(),
             "productoId": id_producto,
             "tipo": "entrada",
@@ -43,7 +29,7 @@ def seed_data(db):
             "usuario": "soporte_tienda"
         })
 
-        db.proveedores.insert_one({
+        db.suppliers.insert_one({
             "_id": id_proveedor,
             "nombre": "Mayorista GlobalTech",
             "contacto": "Mariana Silva",
