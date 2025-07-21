@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from datetime import datetime
 from models import movements, products
 from database import connection
+from utils.idsFunction import convertir_ids
 
 movimientos_bp = Blueprint('movimientos', __name__)
 
@@ -29,8 +30,8 @@ def get_movimientos():
         productos = products.listar_productos(connection.client_db)
 
         return jsonify({
-            "movimientos": movimientos,
-            "productos": productos
+            "movimientos": convertir_ids(movimientos),
+            "productos": convertir_ids(productos)
         }), 200
 
     except ValueError:

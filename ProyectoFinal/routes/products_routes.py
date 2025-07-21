@@ -3,6 +3,7 @@ from bson import ObjectId
 from datetime import datetime
 from models import products, suppliers
 from database import connection
+from utils.idsFunction import convertir_ids
 
 productos_bp = Blueprint('productos', __name__)
 
@@ -12,8 +13,8 @@ def get_productos():
     proveedores = suppliers.obtener_proveedores(connection.client_db)
 
     return jsonify({
-        "productos": productos,
-        "proveedores": proveedores
+        "productos": convertir_ids(productos),
+        "proveedores": convertir_ids(proveedores)
     }), 200
 
 @productos_bp.route('/agregar', methods=['POST'])
@@ -90,9 +91,9 @@ def ver_stock():
         producto_seleccionado = products.consultar_stock_producto(connection.client_db, producto_id)
 
     return jsonify({
-        "productos_faltantes": productos_faltantes,
-        "productos": productos,
-        "producto_seleccionado": producto_seleccionado
+        "productos_faltantes": convertir_ids(productos_faltantes),
+        "productos": convertir_ids(productos),
+        "producto_seleccionado": convertir_ids(producto_seleccionado)
     }), 200
 
 

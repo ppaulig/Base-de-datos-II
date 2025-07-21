@@ -4,15 +4,7 @@ def obtener_proveedores(db):
 
     return list(db.suppliers.find())
 
-def insertar_proveedor(db):
-
-    proveedor = {
-        "nombre": "Electro S.A.",
-        "contacto": "María Gómez",
-        "telefono": "+5491122334455",
-        "email": "contacto@electrosa.com",
-        "productosOfrecidos": ["PROD101", "PROD102"]
-    }
+def insertar_proveedor(db, proveedor):
 
     resultado = db.suppliers.insert_one(proveedor)
     return str(resultado.inserted_id)
