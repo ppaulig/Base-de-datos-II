@@ -11,7 +11,7 @@ seed_data(client_db)
 
 @app.route('/')
 def home():
-    return "Proyecto Final BDII!"
+    return "Proyecto Final Base de Datos II "
 
 app.register_blueprint(productos_bp, url_prefix='/productos')
 app.register_blueprint(proveedores_bp, url_prefix='/proveedores')

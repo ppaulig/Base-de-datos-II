@@ -8,7 +8,7 @@ def listar_movimientos(db):
     pipeline = [
         {
             "$lookup": {
-                "from": "productos",
+                "from": "products",
                 "localField": "productoId",
                 "foreignField": "_id",
                 "as": "producto"
@@ -32,7 +32,7 @@ def listar_movimientos(db):
         }
     ]
 
-    return list(db.movimientos.aggregate(pipeline))
+    return list(db.movements.aggregate(pipeline))
 
 
 def movimientos_por_fecha(db, fecha_inicio, fecha_fin):
@@ -48,7 +48,7 @@ def movimientos_por_fecha(db, fecha_inicio, fecha_fin):
         },
         {
             "$lookup": {
-                "from": "productos",
+                "from": "products",
                 "localField": "productoId",
                 "foreignField": "_id",
                 "as": "producto"
@@ -72,7 +72,7 @@ def movimientos_por_fecha(db, fecha_inicio, fecha_fin):
         }
     ]
 
-    return list(db.movimientos.aggregate(pipeline))
+    return list(db.movements.aggregate(pipeline))
 
 
 def registrar_movimiento(db, datos_movimiento):
@@ -84,12 +84,12 @@ def registrar_movimiento(db, datos_movimiento):
     datos_movimiento["fecha"] = datetime.now()
 
     if datos_movimiento["tipo"] == "entrada":
-        actualizado = products.modificar_stock(db, datos_movimiento["productoId"], datos_movimiento["cantidad"])
+        actualizado = products.actualizar_stock(db, datos_movimiento["productoId"], datos_movimiento["cantidad"])
     elif datos_movimiento["tipo"] == "salida":
-        actualizado = products.modificar_stock(db, datos_movimiento["productoId"], -int(datos_movimiento["cantidad"]))
+        actualizado = products.actualizar_stock(db, datos_movimiento["productoId"], -int(datos_movimiento["cantidad"]))
     else:
         raise ValueError("El tipo de movimiento debe ser 'entrada' o 'salida'")
 
     if actualizado:
-        resultado = db.movimientos.insert_one(datos_movimiento)
+        resultado = db.movements.insert_one(datos_movimiento)
         return str(resultado.inserted_id)

@@ -2,7 +2,7 @@ from bson import ObjectId
 
 def obtener_proveedores(db):
 
-    return list(db.proveedores.find())
+    return list(db.suppliers.find())
 
 def insertar_proveedor(db):
 
@@ -14,7 +14,7 @@ def insertar_proveedor(db):
         "productosOfrecidos": ["PROD101", "PROD102"]
     }
 
-    resultado = db.proveedores.insert_one(proveedor)
+    resultado = db.suppliers.insert_one(proveedor)
     return str(resultado.inserted_id)
 
 def borrar_proveedor(db, proveedor_id):
@@ -22,9 +22,9 @@ def borrar_proveedor(db, proveedor_id):
     proveedor_oid = ObjectId(proveedor_id)
 
     # Eliminar productos asociados al proveedor
-    db.productos.delete_many({"proveedorId": proveedor_oid})
+    db.products.delete_many({"proveedorId": proveedor_oid})
 
     # Eliminar el proveedor
-    resultado = db.proveedores.delete_one({"_id": proveedor_oid})
+    resultado = db.suppliers.delete_one({"_id": proveedor_oid})
 
     return resultado.deleted_count > 0
